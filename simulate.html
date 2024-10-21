@@ -110,7 +110,166 @@
         }
         return false; // Car is not found
       }
+      const carData = [
+        { name: "Neon Tetra", size: 1.5, carelevel: 1, mintanksize: 10 },
+        { name: "Guppy", size: 2.5, carelevel: 1, mintanksize: 5 },
+        { name: "Angelfish", size: 6, carelevel: 2, mintanksize: 20 },
+        { name: "Zebra Danio", size: 2, carelevel: 1, mintanksize: 10 },
+        { name: "Cherry Barb", size: 2, carelevel: 1, mintanksize: 20 },
+        { name: "Swordtail", size: 2.8, carelevel: 1, mintanksize: 15 },
+        { name: "Discus", size: 8, carelevel: 3, mintanksize: 50 },
+        { name: "Betta Fish", size: 2.5, carelevel: 1, mintanksize: 5 },
+        { name: "Molly", size: 3, carelevel: 1, mintanksize: 10 },
+        {
+          name: "White Cloud Mountain Minnow",
+          size: 1.5,
+          carelevel: 1,
+          mintanksize: 10,
+        },
+        { name: "Corydory", size: 3, carelevel: 1, mintanksize: 20 },
+        { name: "Dwarf Gourami", size: 2, carelevel: 2, mintanksize: 10 },
+        { name: "Harlequin Rasbora", size: 2, carelevel: 1, mintanksize: 10 },
+        { name: "Siamese Algae Eater", size: 6, carelevel: 1, mintanksize: 30 },
+        { name: "Kuhli Loach", size: 4, carelevel: 2, mintanksize: 20 },
+        { name: "Bristlenose Pleco", size: 6, carelevel: 1, mintanksize: 30 },
+        { name: "German Blue Ram", size: 3, carelevel: 3, mintanksize: 20 },
+        { name: "Goldfish", size: 6, carelevel: 2, mintanksize: 20 },
+        { name: "Tiger Barb", size: 3, carelevel: 1, mintanksize: 20 },
+        { name: "African Cichlids", size: 5, carelevel: 2, mintanksize: 30 },
+        { name: "Otocinclus Catfish", size: 2, carelevel: 2, mintanksize: 20 },
+        {
+          name: "Boesemani Rainbow Fish",
+          size: 6,
+          carelevel: 2,
+          mintanksize: 30,
+        },
+        { name: "Platy", size: 2.5, carelevel: 1, mintanksize: 10 },
+        { name: "Killifish", size: 4, carelevel: 2, mintanksize: 20 },
+        {
+          name: "Rasbora Borapetensis",
+          size: 2,
+          carelevel: 1,
+          mintanksize: 10,
+        },
+        {
+          name: "Black Ghost Knifefish",
+          size: 20,
+          carelevel: 3,
+          mintanksize: 100,
+        },
+        { name: "Clown Loach", size: 12, carelevel: 2, mintanksize: 75 },
+        { name: "Kissing Gourami", size: 4, carelevel: 1, mintanksize: 30 },
+        { name: "Paradise Fish", size: 4, carelevel: 1, mintanksize: 20 },
+        { name: "Bolivian Ram", size: 3, carelevel: 2, mintanksize: 20 },
+        {
+          name: "Endler’s Livebearer",
+          size: 1.5,
+          carelevel: 1,
+          mintanksize: 10,
+        },
+        { name: "Rosy Barb", size: 5, carelevel: 1, mintanksize: 30 },
+        {
+          name: "Celestial Pearl Danio",
+          size: 1,
+          carelevel: 1,
+          mintanksize: 10,
+        },
+        { name: "Pea Pufferfish", size: 1, carelevel: 2, mintanksize: 5 },
+        { name: "Flowerhorn Cichlid", size: 12, carelevel: 2, mintanksize: 75 },
+        { name: "Sparkling Gourami", size: 1.6, carelevel: 1, mintanksize: 10 },
+        { name: "Emperor Tetra", size: 2, carelevel: 1, mintanksize: 20 },
+        { name: "Rainbow Shark", size: 6, carelevel: 2, mintanksize: 55 },
+        { name: "Pearl Gourami", size: 4, carelevel: 1, mintanksize: 30 },
+        { name: "Peacock Gudgeon", size: 2.5, carelevel: 2, mintanksize: 10 },
+        { name: "Rummynose Tetra", size: 2, carelevel: 2, mintanksize: 20 },
+        { name: "Glass Catfish", size: 4, carelevel: 2, mintanksize: 20 },
+        { name: "Kribensis Cichlid", size: 4, carelevel: 1, mintanksize: 25 },
+        { name: "Red Tail Shark", size: 6, carelevel: 2, mintanksize: 55 },
+        {
+          name: "Blood Parrot Cichlid",
+          size: 8,
+          carelevel: 2,
+          mintanksize: 30,
+        },
+        { name: "Hoplo Catfish", size: 6, carelevel: 1, mintanksize: 30 },
+        { name: "Bala Shark", size: 14, carelevel: 2, mintanksize: 75 },
+        { name: "Silver Dollar", size: 6, carelevel: 2, mintanksize: 50 },
+        { name: "Elephant Nose Fish", size: 9, carelevel: 2, mintanksize: 50 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+        { name: "", size: 0, carelevel: "", mintanksize: 0 },
+      ];
+      function populateCarDropdown() {
+        const selectElement = document.getElementById("cars");
+        carData.forEach((car) => {
+          const option = document.createElement("option");
+          option.value = car.name; // The value could be an ID or name
+          option.text = `${car.name} - $${car.price}`;
+          selectElement.appendChild(option);
+        });
+      }
 
+      // Call this function when the page loads
+      window.onload = function () {
+        populateCarDropdown();
+      };
+
+      // Function to get selected car details
+      function getSelectedCar() {
+        const selectElement = document.getElementById("cars");
+        const selectedCarName = selectElement.value;
+
+        // Find the selected car object in the carData array
+        const selectedCar = carData.find((car) => car.name === selectedCarName);
+
+        console.log(selectedCar); // You can use the car's details (e.g., price, color, stock, etc.)
+      }
       function addCarToList(event) {
         event.preventDefault(); // Prevent the form from submitting
 
@@ -205,16 +364,7 @@
 
     <form onsubmit="addCarToList(event)">
       <label for="cars">Choose a car:</label>
-      <select name="cars" id="cars">
-        <optgroup label="Swedish Cars">
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-        </optgroup>
-        <optgroup label="German Cars">
-          <option value="mercedes">Mercedes</option>
-          <option value="audi">Audi</option>
-        </optgroup>
-      </select>
+      <select name="cars" id="cars"></select>
       <br /><br />
       <input type="submit" value="Submit" />
     </form>
