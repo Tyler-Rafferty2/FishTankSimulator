@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Simulate</title>
+    <style>
+      /*
+      .box {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100vw;
+        height: 70px;
+        margin-bottom: 10px;
+        background-color: rgb(190, 190, 255);
+        z-index: 9;
+      }
+      .downbar {
+        position: absolute;
+        left: -10px;
+        width: 30px;
+        height: 700px;
+        background-color: rgb(138, 71, 168);
+        z-index: 0;
+      }*/
+      .flowers {
+        position: fixed;
+        top: 5px;
+        left: 5px;
+        width: 100px;
+        height: 60px;
+        z-index: 10;
+      } /*
+      .title {
+        position: fixed;
+        top: -10px;
+        left: 125px;
+        width: 1000px;
+        height: 60px;
+        font-family: "Times New Roman";
+        font-size: 35px;
+        z-index: 10;
+      }
+      .image-button {
+        position: fixed;
+        top: 5px;
+        right: 10px;
+        width: 60px;
+        height: 50px;
+        z-index: 10;
+        background: none;
+        background-size: cover;
+        border: none;
+        cursor: pointer;
+        overflow: hidden;
+        clip-path: polygon(11% 15%, 90% 15%, 90% 85%, 11% 85%);
+      }*/
+      .adding {
+        position: relative;
+        top: 50px;
+        left: 40px;
+        width: 1000px;
+        height: 60px;
+        font-family: "Times New Roman";
+        font-size: 35px;
+        z-index: 3;
+      }
+      ul {
+        background: #3399ff;
+        font-size: 15px;
+        padding: 20px;
+        width: 400px;
+      }
+      ul li {
+        position: relavtive;
+        background: #cce5ff;
+        color: darkblue;
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <div class="downbar"></div>
+    <a href="index.html">
+      <img class="flowers" src="images/flowers.jpg" alt="an image of flowers" />
+    </a>
+    <h1 class="title">This is the title</h1>
+
+    <button
+      class="image-button"
+      type="button"
+      onclick="alert('CSS Styled Button Clicked!')"
+    >
+      <img src="images/button.png" alt="Click Me" />
+    </button>
+
+    <h2 class="adding">Add a Fish</h2>
+    <p>add a fish</p>
+
+    <script>
+      function isCarInList(carName) {
+        const carList = document.getElementById("car-list");
+        const listItems = carList.getElementsByTagName("li");
+
+        // Loop through the list items to see if the car name exists
+        for (let item of listItems) {
+          if (item.textContent.includes(carName)) {
+            return true; // Car is found
+          }
+        }
+        return false; // Car is not found
+      }
+
+      function addCarToList(event) {
+        event.preventDefault(); // Prevent the form from submitting
+
+        // Create a new car object for each addition
+        let newCar = {
+          name: "",
+          amount: 1,
+        };
+
+        // Get the selected car
+        const selectElement = document.getElementById("cars");
+        newCar.name = selectElement.options[selectElement.selectedIndex].text;
+
+        if (!isCarInList(newCar.name)) {
+          const li = document.createElement("li");
+          li.textContent = `Car: ${newCar.name}, Amount: ${newCar.amount}`;
+
+          const removeButton = document.createElement("button");
+          removeButton.textContent = "Remove";
+          removeButton.style.marginLeft = "10px";
+          removeButton.onclick = function () {
+            li.remove(); // Remove the list item when the button is clicked
+          };
+
+          const addButton = document.createElement("button");
+          addButton.textContent = "Add";
+          addButton.style.marginLeft = "10px";
+          addButton.onclick = function () {
+            newCar.amount++;
+            li.textContent = `Car: ${newCar.name}, Amount: ${newCar.amount}`;
+            li.appendChild(addButton);
+            li.appendChild(minusButton);
+            li.appendChild(removeButton);
+          };
+
+          const minusButton = document.createElement("button");
+          minusButton.textContent = "Minus";
+          minusButton.style.marginLeft = "10px";
+          minusButton.onclick = function () {
+            if (newCar.amount > 1) {
+              newCar.amount--;
+              li.textContent = `Car: ${newCar.name}, Amount: ${newCar.amount}`;
+              li.appendChild(addButton);
+              li.appendChild(minusButton);
+              li.appendChild(removeButton);
+            }
+          };
+
+          li.appendChild(addButton);
+          li.appendChild(minusButton);
+          li.appendChild(removeButton);
+
+          const carList = document.getElementById("car-list");
+          carList.appendChild(li);
+        }
+      }
+
+      // Function to access and return the current car list as an array of objects
+      function getCarList() {
+        const carList = document.getElementById("car-list");
+        const listItems = carList.getElementsByTagName("li");
+        const cars = [];
+
+        for (let item of listItems) {
+          const carData = item.textContent.match(/Car: (.*), Amount: (\d+)/);
+          if (carData) {
+            const carName = carData[1];
+            const carAmount = parseInt(carData[2]);
+            cars.push({ name: carName, amount: carAmount });
+          }
+        }
+
+        return cars;
+      }
+
+      // Example usage: Access the current list of cars
+      function showCarList() {
+        const cars = getCarList();
+        console.log(cars); // Logs the list of cars
+      }
+
+      // Example usage: Simulate total number of cars
+      function simulate() {
+        const cars = getCarList();
+        let total = 0;
+        for (let selectedCar of cars) {
+          total += selectedCar.amount;
+        }
+        console.log(total);
+      }
+    </script>
+
+    <form onsubmit="addCarToList(event)">
+      <label for="cars">Choose a car:</label>
+      <select name="cars" id="cars">
+        <optgroup label="Swedish Cars">
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+        </optgroup>
+        <optgroup label="German Cars">
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </optgroup>
+      </select>
+      <br /><br />
+      <input type="submit" value="Submit" />
+    </form>
+
+    <h2>Selected Cars:</h2>
+    <ul id="car-list"></ul>
+
+    <button class="simulate-button" type="button" onclick="simulate()">
+      <img src="" alt="Simulate" />
+    </button>
+  </body>
+</html>
