@@ -95,7 +95,8 @@
     </button>
 
     <h2 class="adding">Add a Fish</h2>
-    <p>add a fish</p>
+    <h3>Enter a tank size</h3>
+    <input type="text" id="textInput" placeholder="Size of the Tank" />
 
     <script>
       function isCarInList(carName) {
@@ -307,15 +308,20 @@
       function simulate() {
         const cars = getCarList();
         let totalLength = 0;
-
+        let min = 0;
         for (let selectedCar of cars) {
           const carInfo = carData.find((car) => car.name === selectedCar.name);
           if (carInfo) {
             totalLength += selectedCar.amount * carInfo.size; // Sum size * amount
           }
+          if (carInfo.mintanksize > min) {
+            min = carInfo.mintanksize;
+          }
         }
-
-        console.log(`Total fish length: ${totalLength} inches`);
+        var input = document.getElementById("textInput").value;
+        console.log(
+          `Total fish length: ${totalLength} inches and tank size is ${input} and min tank size is ${min}`
+        );
       }
     </script>
 
