@@ -319,9 +319,17 @@
           }
         }
         var input = document.getElementById("textInput").value;
-        console.log(
-          `Total fish length: ${totalLength} inches and tank size is ${input} and min tank size is ${min}`
-        );
+        // Create a new h1 element
+        const heading = document.createElement("h1");
+
+        // Set the text content for the heading
+        heading.textContent = `Total fish length: ${totalLength} inches and tank size is ${input} and min tank size is ${min}`;
+
+        // Find the container where the heading will be inserted
+        const container = document.getElementById("container");
+
+        // Append the heading to the container
+        container.appendChild(heading);
       }
     </script>
 
@@ -338,5 +346,6 @@
     <button class="simulate-button" type="button" onclick="simulate()">
       <img src="" alt="Simulate" />
     </button>
+    <div id="container"></div>
   </body>
 </html>
