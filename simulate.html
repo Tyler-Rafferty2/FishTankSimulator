@@ -3,7 +3,6 @@
   <head>
     <title>Simulate</title>
     <style>
-      /*
       .box {
         position: fixed;
         top: 0px;
@@ -14,14 +13,6 @@
         background-color: rgb(190, 190, 255);
         z-index: 9;
       }
-      .downbar {
-        position: absolute;
-        left: -10px;
-        width: 30px;
-        height: 700px;
-        background-color: rgb(138, 71, 168);
-        z-index: 0;
-      }*/
       .flowers {
         position: fixed;
         top: 5px;
@@ -29,7 +20,7 @@
         width: 100px;
         height: 60px;
         z-index: 10;
-      } /*
+      }
       .title {
         position: fixed;
         top: -10px;
@@ -53,7 +44,7 @@
         cursor: pointer;
         overflow: hidden;
         clip-path: polygon(11% 15%, 90% 15%, 90% 85%, 11% 85%);
-      }*/
+      }
       .adding {
         position: relative;
         top: 50px;
@@ -64,6 +55,18 @@
         font-size: 35px;
         z-index: 3;
       }
+      #container {
+        position: absolute; /* Make container a reference point */
+        top: 200px;
+        right: 0;
+        left: 50%;
+        width: 50%;
+      }
+
+      #tankdesc {
+        position: relative;
+      }
+
       ul {
         background: #3399ff;
         font-size: 15px;
@@ -71,7 +74,7 @@
         width: 400px;
       }
       ul li {
-        position: relavtive;
+        position: relative;
         background: #cce5ff;
         color: darkblue;
         margin: 5px;
@@ -80,11 +83,10 @@
   </head>
   <body>
     <div class="box"></div>
-    <div class="downbar"></div>
     <a href="index.html">
       <img class="flowers" src="images/flowers.jpg" alt="an image of flowers" />
     </a>
-    <h1 class="title">This is the title</h1>
+    <h1 class="title">Fish Tank Simulator</h1>
 
     <button
       class="image-button"
@@ -99,19 +101,19 @@
     <input type="text" id="textInput" placeholder="Size of the Tank" />
 
     <script>
-      function isCarInList(carName) {
-        const carList = document.getElementById("car-list");
-        const listItems = carList.getElementsByTagName("li");
+      function isFishInList(fishName) {
+        const fishList = document.getElementById("fish-list");
+        const listItems = fishList.getElementsByTagName("li");
 
-        // Loop through the list items to see if the car name exists
+        // Loop through the list items to see if the fish name exists
         for (let item of listItems) {
-          if (item.textContent.includes(carName)) {
-            return true; // Car is found
+          if (item.textContent.includes(fishName)) {
+            return true; // Fish is found
           }
         }
-        return false; // Car is not found
+        return false; // Fish is not found
       }
-      const carData = [
+      const fishData = [
         { name: "African Cichlids", size: 5, carelevel: 2, mintanksize: 30 },
         { name: "Angelfish", size: 6, carelevel: 2, mintanksize: 20 },
         { name: "Bala Shark", size: 14, carelevel: 2, mintanksize: 75 },
@@ -198,47 +200,49 @@
         { name: "Zebra Danio", size: 2, carelevel: 1, mintanksize: 10 },
       ];
 
-      function populateCarDropdown() {
-        const selectElement = document.getElementById("cars");
-        carData.forEach((car) => {
+      function populateFishDropdown() {
+        const selectElement = document.getElementById("fishes");
+        fishData.forEach((fish) => {
           const option = document.createElement("option");
-          option.value = car.name; // The value could be an ID or name
-          option.text = `${car.name}`;
+          option.value = fish.name; // The value could be an ID or name
+          option.text = `${fish.name}`;
           selectElement.appendChild(option);
         });
       }
 
       // Call this function when the page loads
       window.onload = function () {
-        populateCarDropdown();
+        populateFishDropdown();
       };
 
-      // Function to get selected car details
-      function getSelectedCar() {
-        const selectElement = document.getElementById("cars");
-        const selectedCarName = selectElement.value;
+      // Function to get selected fish details
+      function getSelectedFish() {
+        const selectElement = document.getElementById("fishes");
+        const selectedFishName = selectElement.value;
 
-        // Find the selected car object in the carData array
-        const selectedCar = carData.find((car) => car.name === selectedCarName);
+        // Find the selected fish object in the fishData array
+        const selectedFish = fishData.find(
+          (fish) => fish.name === selectedFishName
+        );
 
-        console.log(selectedCar); // You can use the car's details (e.g., price, color, stock, etc.)
+        console.log(selectedFish); // You can use the fish's details (e.g., size, care level, etc.)
       }
-      function addCarToList(event) {
+      function addFishToList(event) {
         event.preventDefault(); // Prevent the form from submitting
 
-        // Create a new car object for each addition
-        let newCar = {
+        // Create a new fish object for each addition
+        let newFish = {
           name: "",
           amount: 1,
         };
 
-        // Get the selected car
-        const selectElement = document.getElementById("cars");
-        newCar.name = selectElement.options[selectElement.selectedIndex].text;
+        // Get the selected fish
+        const selectElement = document.getElementById("fishes");
+        newFish.name = selectElement.options[selectElement.selectedIndex].text;
 
-        if (!isCarInList(newCar.name)) {
+        if (!isFishInList(newFish.name)) {
           const li = document.createElement("li");
-          li.textContent = `Car: ${newCar.name}, Amount: ${newCar.amount}`;
+          li.textContent = `Fish: ${newFish.name}, Amount: ${newFish.amount}`;
 
           const removeButton = document.createElement("button");
           removeButton.textContent = "Remove";
@@ -251,8 +255,8 @@
           addButton.textContent = "Add";
           addButton.style.marginLeft = "10px";
           addButton.onclick = function () {
-            newCar.amount++;
-            li.textContent = `Car: ${newCar.name}, Amount: ${newCar.amount}`;
+            newFish.amount++;
+            li.textContent = `Fish: ${newFish.name}, Amount: ${newFish.amount}`;
             li.appendChild(addButton);
             li.appendChild(minusButton);
             li.appendChild(removeButton);
@@ -262,9 +266,9 @@
           minusButton.textContent = "Minus";
           minusButton.style.marginLeft = "10px";
           minusButton.onclick = function () {
-            if (newCar.amount > 1) {
-              newCar.amount--;
-              li.textContent = `Car: ${newCar.name}, Amount: ${newCar.amount}`;
+            if (newFish.amount > 1) {
+              newFish.amount--;
+              li.textContent = `Fish: ${newFish.name}, Amount: ${newFish.amount}`;
               li.appendChild(addButton);
               li.appendChild(minusButton);
               li.appendChild(removeButton);
@@ -275,91 +279,90 @@
           li.appendChild(minusButton);
           li.appendChild(removeButton);
 
-          const carList = document.getElementById("car-list");
-          carList.appendChild(li);
+          const fishList = document.getElementById("fish-list");
+          fishList.appendChild(li);
         }
       }
 
-      // Function to access and return the current car list as an array of objects
-      function getCarList() {
-        const carList = document.getElementById("car-list");
-        const listItems = carList.getElementsByTagName("li");
-        const cars = [];
+      // Function to access and return the current fish list as an array of objects
+      function getFishList() {
+        const fishList = document.getElementById("fish-list");
+        const listItems = fishList.getElementsByTagName("li");
+        const fishes = [];
 
         for (let item of listItems) {
-          const carData = item.textContent.match(/Car: (.*), Amount: (\d+)/);
-          if (carData) {
-            const carName = carData[1];
-            const carAmount = parseInt(carData[2]);
-            cars.push({ name: carName, amount: carAmount });
+          const fishData = item.textContent.match(/Fish: (.*), Amount: (\d+)/);
+          if (fishData) {
+            const fishName = fishData[1];
+            const fishAmount = parseInt(fishData[2]);
+            fishes.push({ name: fishName, amount: fishAmount });
           }
         }
 
-        return cars;
+        return fishes;
       }
 
-      // Example usage: Access the current list of cars
-      function showCarList() {
-        const cars = getCarList();
-        console.log(cars); // Logs the list of cars
+      // Example usage: Access the current list of fishes
+      function showFishList() {
+        const fishes = getFishList();
+        console.log(fishes); // Logs the list of fishes
       }
 
-      //print
+      // Print function to display details
       function print(length, size, minsize, mincare) {
-        // Create a new h1 element
-        const heading = document.createElement("h1");
+        const heading = document.createElement("h2");
+        const tankdesc = document.createElement("h2");
 
-        // Set the text content for the heading
-        console.log(
-          `Total fish length: ${length} inches and tank size is ${size} and min tank size is ${minsize} and min care level is ${mincare}`
-        );
         heading.textContent = `Total fish length: ${length} inches and tank size is ${size} and min tank size is ${minsize} and min care level is ${mincare}`;
+        tankdesc.textContent =
+          length > size ? "The tank is too small" : "The tank is large enough";
 
-        // Find the container where the heading will be inserted
         const container = document.getElementById("container");
+        const container2 = document.getElementById("tankdesc");
 
-        // Append the heading to the container
         if (container.firstElementChild) {
           container.removeChild(container.firstElementChild);
         }
         container.appendChild(heading);
+
+        if (container2.firstElementChild) {
+          container2.removeChild(container2.firstElementChild);
+        }
+        container2.appendChild(tankdesc);
       }
-      // Example usage: Simulate total number of cars
+
       function simulate() {
-        const cars = getCarList();
+        const fishes = getFishList();
         let totalLength = 0;
         let minsize = 0;
         let mincare = 0;
-        for (let selectedCar of cars) {
-          const carInfo = carData.find((car) => car.name === selectedCar.name);
-          if (carInfo) {
-            totalLength += selectedCar.amount * carInfo.size; // Sum size * amount
-          }
-          if (carInfo.mintanksize > minsize) {
-            minsize = carInfo.mintanksize;
-          }
-          if (carInfo.carelevel > mincare) {
-            mincare = carInfo.carelevel;
+        for (let selectedFish of fishes) {
+          const fishInfo = fishData.find(
+            (fish) => fish.name === selectedFish.name
+          );
+          if (fishInfo) {
+            totalLength += selectedFish.amount * fishInfo.size; // Sum size * amount
+            minsize += fishInfo.mintanksize;
+            mincare += fishInfo.carelevel;
           }
         }
-        var input = document.getElementById("textInput").value;
-        print(totalLength, input, minsize, mincare);
+
+        const tanksize = parseInt(document.getElementById("textInput").value);
+
+        print(totalLength, tanksize, minsize, mincare);
       }
     </script>
 
-    <form onsubmit="addCarToList(event)">
-      <label for="cars">Choose a car:</label>
-      <select name="cars" id="cars"></select>
-      <br /><br />
-      <input type="submit" value="Submit" />
-    </form>
+    <div>
+      <h3>Select Fish:</h3>
+      <select id="fishes"></select>
+      <button onclick="addFishToList(event)">Add to List</button>
+    </div>
+    <ul id="fish-list"></ul>
 
-    <h2>Selected Cars:</h2>
-    <ul id="car-list"></ul>
-
-    <button class="simulate-button" type="button" onclick="simulate()">
-      <img src="" alt="Simulate" />
-    </button>
     <div id="container"></div>
+    <div id="tankdesc"></div>
+
+    <button onclick="simulate()">Simulate</button>
   </body>
 </html>
